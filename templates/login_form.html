@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Injection & Validation Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0b111e !important; color: #ffffff !important; min-height: 100vh; display: flex; align-items: center; font-family: 'Segoe UI', sans-serif; }
+        .cyber-panel { background: linear-gradient(145deg, #0f192e, #13223f) !important; border: 2px solid #00f2fe !important; box-shadow: 0 0 25px rgba(0, 242, 254, 0.25) !important; border-radius: 16px !important; padding: 30px; }
+        .panel-heading { color: #00f2fe !important; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); font-weight: bold; }
+        .form-control, .form-select { background-color: #070d19 !important; color: #ffffff !important; border: 1px solid #2c3e50 !important; }
+        .form-control:focus, .form-select:focus { border-color: #00f2fe !important; box-shadow: 0 0 10px rgba(0, 242, 254, 0.5) !important; background-color: #070d19 !important; color: #ffffff !important; }
+        .btn-cyber { background: linear-gradient(90deg, #ff007f, #7928ca) !important; color: #ffffff !important; font-weight: bold !important; border: none !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4) !important; transition: all 0.3s ease !important; }
+        .btn-cyber:hover { transform: translateY(-2px) !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.7) !important; }
+        .console-box { background-color: #050a14 !important; border: 1px dashed #00f2fe !important; font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6">
+                <div class="cyber-panel h-100">
+                    <h3 class="panel-heading mb-4"><i class="fa-solid fa-shield-halved"></i> SQLi Control Panel</h3>
+                    <form action="/sqli-demo" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label text-white-50">Username / SQL Payload:</label>
+                            <input type="text" name="username" class="form-control" required placeholder="e.g. admin or ' OR '1'='1">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white-50">Password:</label>
+                            <input type="password" name="password" class="form-control" placeholder="Leave empty for injection test">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label text-white-50">Security Mode:</label>
+                            <select name="mode" class="form-select">
+                                <option value="unsecure">🔴 Unsecure Mode (ثغرة مفعّلة)</option>
+                                <option value="secure" selected>🟢 Secure Mode (مفعّل الـ Validation والحماية)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-cyber w-100 p-2.5 fs-5">
+                            <i class="fa-solid fa-terminal me-2"></i> Test Authentication
+                        </button>
+                    </form>
+                    {% if msg %}
+                        <div class="alert mt-4 text-center fw-bold" style="background: rgba(255,255,255,0.05); color: #fff; border-color: #2c3e50;">{{ msg }}</div>
+                    {% endif %}
+                    <div class="mt-4 text-center"><a href="/" class="text-decoration-none text-info"><i class="fa-solid fa-arrow-left me-1"></i> Back to Dashboard</a></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="cyber-panel h-100" style="border-color: #ff007f !important;">
+                    <h4 class="mb-4" style="color: #ff007f;"><i class="fa-solid fa-magnifying-glass-chart"></i> Live Backend Inspector</h4>
+                    {% if info %}
+                        <div class="p-3 console-box rounded text-start">
+                            <p class="m-0 text-warning"><strong>[+] Selected Mode:</strong> <span class="text-white">{{ info.mode.upper() }}</span></p>
+                            <hr class="border-secondary my-2">
+                            <p class="m-0 text-info"><strong>[+] Input Validation:</strong> <span class="{{ 'text-success' if 'Pass' in info.validation else 'text-danger fw-bold' }}">{{ info.validation }}</span></p>
+                            <hr class="border-secondary my-2">
+                            <p class="m-0 text-danger"><strong>[+] Raw Input User:</strong> <span class="text-white">{{ info.entered_user }}</span></p>
+                            <p class="m-0 text-danger"><strong>[+] Executed SQL Query:</strong></p>
+                            <p class="p-2 mt-1 bg-dark rounded text-white-50 border border-secondary" style="word-break: break-all;">{{ info.executed_query }}</p>
+                        </div>
+                    {% else %}
+                        <div class="text-center text-muted my-5"><i class="fa-solid fa-satellite-dish fs-1 mb-3"></i><p>في انتظار إرسال بيانات للفحص...</p></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

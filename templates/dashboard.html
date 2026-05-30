@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Cyber Security Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0b111e !important;
+            color: #ffffff !important;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .main-panel {
+            background: linear-gradient(145deg, #0f192e, #13223f) !important;
+            border: 2px solid #00f2fe !important;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .hub-title {
+            color: #00f2fe;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            font-weight: 800;
+        }
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #2c3e50;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .card-ai:hover {
+            border-color: #00f2fe;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            transform: translateY(-5px);
+        }
+        .card-sec:hover {
+            border-color: #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+            transform: translateY(-5px);
+        }
+        .btn-ai { background: linear-gradient(90deg, #00f2fe, #4facfe); color: #000; font-weight: bold; }
+        .btn-sec { background: linear-gradient(90deg, #ff007f, #7928ca); color: #fff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-panel mx-auto text-center" style="max-width: 850px;">
+            <h1 class="hub-title mb-2"><i class="fa-solid fa-graduation-cap"></i> Senior Web Engineering Portal</h1>
+            <p class="text-white-50 mb-5">مرحباً بكِ يا بشمهندسة في منصة التحكم الشاملة لمشاريع المادة</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="project-card card-ai p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <i class="fa-solid fa-brain fs-1 text-info mb-3"></i>
+                            <h4 class="text-white">Project 1: AI Predictor</h4>
+                            <p class="text-muted small">نموذج ذكاء اصطناعي (انحدار خطي) لتوقع مرتبات المبرمجين بناءً على سنوات الخبرة والتقييم الشخصي بأسلوب الـ Cyberpunk.</p>
+                        </div>
+                        <a href="/ai-model" class="btn btn-ai w-100 mt-3">Launch AI Model</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="project-card card-sec p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <i class="fa-solid fa-shield-halved fs-1 text-danger mb-3" style="color: #ff007f !important;"></i>
+                            <h4 class="text-white">Project 2: SQLi Defense</h4>
+                            <p class="text-muted small">محاكاة أمنية متكاملة لثغرة الـ SQL Injection وإثبات قوة الـ Input Validation والـ Parameterized Queries في صد الهجمات.</p>
+                        </div>
+                        <a href="/sqli-demo" class="btn btn-sec w-100 mt-3">Launch Security Panel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
